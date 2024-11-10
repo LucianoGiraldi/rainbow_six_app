@@ -7,19 +7,34 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: CadastrarPersonagem()));
 
     expect(find.text('Cadastrar Personagem'), findsOneWidget);
-    expect(find.byType(TextField), findsNWidgets(2)); // Nome e URL da foto
-    expect(find.byType(DropdownButton<int>), findsNWidgets(2)); // Velocidade e Blindagem
+
+    // Atualize o número total de TextField esperado com base nos campos existentes
+    expect(find.byType(TextField), findsNWidgets(6)); // Nome, armas e gadgets
+
+    // Confirme que existem dois DropdownButton<int> para Velocidade e Blindagem
+    expect(find.byType(DropdownButtonFormField<int>), findsNWidgets(2));
   });
 
   testWidgets('Salva o personagem ao preencher os campos e clicar no botão Salvar', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(home: CadastrarPersonagem()));
 
-    await tester.enterText(find.byType(TextField).first, 'Ash');
-    await tester.enterText(find.byType(TextField).last, 'https://example.com/ash.jpg');
+    // Atribuir Keys para facilitar a seleção de TextFields
+    await tester.enterText(find.byKey(Key('nome')), 'Ash');
+    await tester.enterText(find.byKey(Key('armaPrimaria')), 'AK-47');
+    await tester.enterText(find.byKey(Key('armaSecundaria')), 'Pistol');
+    await tester.enterText(find.byKey(Key('gadgetPrincipal')), 'Drone');
+    await tester.enterText(find.byKey(Key('gadgetPrimario')), 'Granada');
+    await tester.enterText(find.byKey(Key('gadgetSecundario')), 'C4');
 
-    await tester.tap(find.text('Salvar Personagem'));
-    await tester.pump();
+    // Garanta que o botão "Salvar Personagem" esteja visível e depois clique nele
+    final salvarButton = find.text('Salvar Personagem');
+    await tester.ensureVisible(salvarButton);
+    await tester.tap(salvarButton);
 
-    // Você pode adicionar validações para garantir que a navegação foi chamada ou que um personagem foi salvo
+    // Aguarde o próximo frame para aplicar a ação
+    await tester.pumpAndSettle();
+
+    // Adicione validações adicionais se necessário
   });
 }
+

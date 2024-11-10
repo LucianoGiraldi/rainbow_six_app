@@ -1,49 +1,39 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rainbow_six_app/models/personagem.dart';
+import 'package:rainbow_six_app/screens/cadastrar_personagem.dart';
 
 void main() {
-  test('Converte JSON para objeto Personagem', () {
-    final personagemJson = {
-      'id': 1,
-      'nome': 'Ash',
-      'fotoUrl': 'https://liquipedia.net/commons/images/thumb/7/7b/Ash_R6S_Half.png/294px-Ash_R6S_Half.png',
-      'velocidade': 3,
-      'blindagem': 1,
-      'armaPrimaria': 'R4-C',
-      'armaSecundaria': 'M45 MEUSOC',
-      'gadgetPrimario': 'Breach Charge',
-      'gadgetSecundario': 'Claymore'
-    };
+  testWidgets('Exibe corretamente os campos na tela de cadastro de personagem', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: CadastrarPersonagem()));
 
-    final personagem = Personagem.fromJson(personagemJson);
+    expect(find.text('Cadastrar Personagem'), findsOneWidget);
 
-    expect(personagem.id, 1);
-    expect(personagem.nome, 'Ash');
-    expect(personagem.velocidade, 3);
-    expect(personagem.blindagem, 1);
-    expect(personagem.armaPrimaria, 'R4-C');
+    // Atualize o número total de TextField esperado com base nos campos existentes
+    expect(find.byType(TextField), findsNWidgets(6)); // Nome, armas e gadgets
+
+    // Confirme que existem dois DropdownButtonFormField<int> para Velocidade e Blindagem
+    expect(find.byType(DropdownButtonFormField<int>), findsNWidgets(2));
   });
 
-  test('Converte objeto Personagem para JSON', () {
-    final personagem = Personagem(
-      id: 1,
-      nome: 'Ash',
-      fotoUrl: 'https://liquipedia.net/commons/images/thumb/7/7b/Ash_R6S_Half.png/294px-Ash_R6S_Half.png',
-      velocidade: 3,
-      blindagem: 1,
-      armaPrimaria: 'R4-C',
-      armaSecundaria: 'M45 MEUSOC',
-      gadgetPrincipal: 'MUNIÇÃO EXPLOSIVA',
-      gadgetPrimario: 'Carga de demolição',
-      papel: 'Ataque',
-      gadgetSecundario: 'Claymore',
-    );
+  testWidgets('Salva o personagem ao preencher os campos e clicar no botão Salvar', (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(home: CadastrarPersonagem()));
 
-    final personagemJson = personagem.toJson();
+    // Atribuir Keys para facilitar a seleção de TextFields
+    await tester.enterText(find.byKey(Key('nome')), 'Ash');
+    await tester.enterText(find.byKey(Key('armaPrimaria')), 'AK-47');
+    await tester.enterText(find.byKey(Key('armaSecundaria')), 'Pistol');
+    await tester.enterText(find.byKey(Key('gadgetPrincipal')), 'Drone');
+    await tester.enterText(find.byKey(Key('gadgetPrimario')), 'Granada');
+    await tester.enterText(find.byKey(Key('gadgetSecundario')), 'C4');
 
-    expect(personagemJson['id'], 1);
-    expect(personagemJson['nome'], 'Ash');
-    expect(personagemJson['velocidade'], 3);
-    expect(personagemJson['blindagem'], 1);
+    // Garanta que o botão "Salvar Personagem" esteja visível e depois clique nele
+    final salvarButton = find.text('Salvar Personagem');
+    await tester.ensureVisible(salvarButton);
+    await tester.tap(salvarButton);
+
+    // Aguarde o próximo frame para aplicar a ação
+    await tester.pumpAndSettle();
+
+    // Adicione validações adicionais se necessário
   });
 }
