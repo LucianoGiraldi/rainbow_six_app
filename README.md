@@ -33,9 +33,11 @@ Certifique-se de ter o seguinte instalado em seu sistema:
    git clone https://github.com/seu-usuario/rainbow_six_app.git
    cd rainbow_six_app
 
-2. **Instale as dependências:
-
-    No diretório do projeto, execute o seguinte comando:
+  2. No diretório do projeto, execute o seguinte comando:
   ```bash
     flutter pub get
+    flutter run
+
+
+    
 
