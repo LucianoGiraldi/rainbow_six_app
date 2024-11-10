@@ -1,0 +1,93 @@
+{
+  "personagens": [
+    {
+      "id": null,
+      "nome": "Ash",
+      "fotoUrl": "https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/QOEBDfqjtUxVBc31l8L9f/4d9b112565baf81d56d69279b95cd463/r6-operators-list-ash_317253.png",
+      "velocidade": 1,
+      "blindagem": 3,
+      "armaPrimaria": "R4-C",
+      "armaSecundaria": "Pistol",
+      "gadgetPrincipal": "MUNIÇÃO EXPLOSIVA",
+      "gadgetPrimario": "Drone",
+      "gadgetSecundario": "C4"
+    },
+    {
+      "id": null,
+      "nome": "ash",
+      "fotoUrl": "https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/QOEBDfqjtUxVBc31l8L9f/4d9b112565baf81d56d69279b95cd463/r6-operators-list-ash_317253.png",
+      "velocidade": 3,
+      "blindagem": 1,
+      "armaPrimaria": "AK-47",
+      "armaSecundaria": "Pistol",
+      "gadgetPrincipal": "Munição explosiva",
+      "gadgetPrimario": "Drone",
+      "gadgetSecundario": "C4"
+    },
+    {
+      "id": null,
+      "nome": "Ash",
+      "fotoUrl": "blob:http://localhost:49633/f4a1b288-665d-4c1b-9bbf-db99dddaa1a2",
+      "velocidade": 3,
+      "blindagem": 1,
+      "armaPrimaria": "AK-47",
+      "armaSecundaria": "Pistol",
+      "gadgetPrincipal": "Gadget Principal Exemplo",
+      "gadgetPrimario": "Drone",
+      "gadgetSecundario": "C4",
+      "papel": "Ataque"
+    },
+    {
+      "id": null,
+      "nome": "Sledge",
+      "fotoUrl": "blob:http://localhost:54250/5f612c14-a3c6-425b-940d-08a23a416d82",
+      "velocidade": 2,
+      "blindagem": 2,
+      "armaPrimaria": "AK-47",
+      "armaSecundaria": "Pistol",
+      "gadgetPrincipal": "Gadget Principal Exemplo",
+      "gadgetPrimario": "Drone",
+      "gadgetSecundario": "C4",
+      "papel": "Ataque"
+    },
+    {
+      "id": null,
+      "nome": "mute",
+      "fotoUrl": "",
+      "velocidade": 1,
+      "blindagem": 3,
+      "armaPrimaria": "AK-47",
+      "armaSecundaria": "Pistol",
+      "gadgetPrincipal": "Gadget Principal Exemplo",
+      "gadgetPrimario": "Drone",
+      "gadgetSecundario": "C4",
+      "papel": "Defesa"
+    },
+    {
+      "id": null,
+      "nome": "as",
+      "fotoUrl": "",
+      "velocidade": 3,
+      "blindagem": 1,
+      "armaPrimaria": "r4-c",
+      "armaSecundaria": "doze",
+      "gadgetPrincipal": "marretao",
+      "gadgetPrimario": "granda de luz ",
+      "gadgetSecundario": "granda explosiva",
+      "papel": "Ataque"
+    },
+    {
+      "id": null,
+      "nome": "thermas",
+      "fotoUrl": "",
+      "velocidade": 2,
+      "blindagem": 2,
+      "armaPrimaria": "m4",
+      "armaSecundaria": "clock",
+      "gadgetPrincipal": "carga explosiva",
+      "gadgetPrimario": "granda de luz",
+      "gadgetSecundario": "claymore",
+      "papel": "Ataque"
+    }
+  ]
+}
