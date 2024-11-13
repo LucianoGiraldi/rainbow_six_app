@@ -88,6 +88,32 @@
       "gadgetPrimario": "granda de luz",
       "gadgetSecundario": "claymore",
       "papel": "Ataque"
+    },
+    {
+      "id": null,
+      "nome": "ash",
+      "fotoUrl": "",
+      "velocidade": 1,
+      "blindagem": 3,
+      "armaPrimaria": "r4-c",
+      "armaSecundaria": "clock",
+      "gadgetPrincipal": "municaoexplosiva",
+      "gadgetPrimario": "granda de luz",
+      "gadgetSecundario": "drone",
+      "papel": "Ataque"
+    },
+    {
+      "id": null,
+      "nome": "ash",
+      "fotoUrl": "",
+      "velocidade": 1,
+      "blindagem": 2,
+      "armaPrimaria": "r4-c",
+      "armaSecundaria": "clock",
+      "gadgetPrincipal": "municao explosiva",
+      "gadgetPrimario": "luz",
+      "gadgetSecundario": "drone",
+      "papel": "Ataque"
     }
   ]
 }

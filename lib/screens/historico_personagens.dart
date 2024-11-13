@@ -2,9 +2,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/personagem.dart';
 import '../services/api_service.dart';
+import 'cadastrar_personagem.dart'; // Import necessário para navegação à tela de edição
 
-class HistoricoPersonagens extends StatelessWidget {
+class HistoricoPersonagens extends StatefulWidget {
+  @override
+  _HistoricoPersonagensState createState() => _HistoricoPersonagensState();
+}
+
+class _HistoricoPersonagensState extends State<HistoricoPersonagens> {
   final ApiService apiService = ApiService();
+
+  // Método para atualizar a lista após exclusão
+  void _atualizarLista() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +70,32 @@ class HistoricoPersonagens extends StatelessWidget {
                         Text('Gadget Principal: ${personagem.gadgetPrincipal}'),
                       ],
                     ),
-                    trailing: Icon(Icons.arrow_forward_ios, color: Colors.black),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CadastrarPersonagem(personagem: personagem),
+                              ),
+                            ).then((_) => _atualizarLista()); // Atualiza a lista ao retornar
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () async {
+                            await apiService.deletePersonagem(personagem.id!);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${personagem.nome} foi excluído.')),
+                            );
+                            _atualizarLista(); // Recarregar a lista após exclusão
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

@@ -25,4 +25,25 @@ class ApiService {
       throw Exception('Failed to create personagem');
     }
   }
+
+  Future<void> deletePersonagem(int id) async {
+  final response = await http.delete(Uri.parse('$baseUrl/personagens/$id'));
+  if (response.statusCode != 200) {
+    throw Exception('Falha ao excluir o personagem');
+  }
+}
+
+  Future<void> updatePersonagem(Personagem personagem) async {
+  final response = await http.put(
+    Uri.parse('$baseUrl/personagens/${personagem.id}'),
+    headers: {'Content-Type': 'application/json'},
+    body: json.encode(personagem.toJson()),
+  );
+  if (response.statusCode != 200) {
+    throw Exception('Falha ao atualizar o personagem');
+  }
+}
+
+
+
 }

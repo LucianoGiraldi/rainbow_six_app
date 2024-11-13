@@ -5,6 +5,10 @@ import '../models/personagem.dart';
 import '../services/api_service.dart';
 
 class CadastrarPersonagem extends StatefulWidget {
+  final Personagem? personagem; 
+
+  CadastrarPersonagem({this.personagem});
+
   @override
   _CadastrarPersonagemState createState() => _CadastrarPersonagemState();
 }
@@ -22,6 +26,23 @@ class _CadastrarPersonagemState extends State<CadastrarPersonagem> {
   int _blindagem = 1;
   Uint8List? _imageBytes;
   String _papel = 'Ataque';
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.personagem != null) {
+      // Preencher campos com os dados do personagem, caso esteja sendo editado
+      _nomeController.text = widget.personagem!.nome;
+      _armaPrimariaController.text = widget.personagem!.armaPrimaria;
+      _armaSecundariaController.text = widget.personagem!.armaSecundaria;
+      _gadgetPrincipalController.text = widget.personagem!.gadgetPrincipal;
+      _gadgetPrimarioController.text = widget.personagem!.gadgetPrimario;
+      _gadgetSecundarioController.text = widget.personagem!.gadgetSecundario;
+      _velocidade = widget.personagem!.velocidade;
+      _blindagem = widget.personagem!.blindagem;
+      _papel = widget.personagem!.papel;
+    }
+  }
 
   Future<void> _pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -45,6 +66,7 @@ class _CadastrarPersonagemState extends State<CadastrarPersonagem> {
     }
 
     final personagem = Personagem(
+      id: widget.personagem?.id, // Manter o ID para atualização
       nome: _nomeController.text,
       fotoUrl: '', // Pode ignorar o campo fotoUrl para testes
       velocidade: _velocidade,
@@ -57,7 +79,12 @@ class _CadastrarPersonagemState extends State<CadastrarPersonagem> {
       papel: _papel,
     );
 
-    await apiService.createPersonagem(personagem);
+    // Diferenciar entre criação e atualização
+    if (widget.personagem == null) {
+      await apiService.createPersonagem(personagem);
+    } else {
+      await apiService.updatePersonagem(personagem);
+    }
     Navigator.pop(context);
   }
 
@@ -65,7 +92,7 @@ class _CadastrarPersonagemState extends State<CadastrarPersonagem> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cadastrar Personagem'),
+        title: Text(widget.personagem == null ? 'Cadastrar Personagem' : 'Editar Personagem'), // Título dinâmico
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -219,7 +246,7 @@ class _CadastrarPersonagemState extends State<CadastrarPersonagem> {
                   ),
                 ),
                 child: Text(
-                  'Salvar Personagem',
+                  widget.personagem == null ? 'Salvar Personagem' : 'Atualizar Personagem', // Texto dinâmico no botão
                   style: TextStyle(fontSize: 18),
                 ),
               ),
